@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<meta charset="utf-8">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <title>
+        Simple Shorting URL Service
+    </title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<script>
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            var url = "{{ url_for('main') }}"; // send the form data here.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $('form').serialize(), // serializes the form's elements.
+                success: function(data) {
+                    console.log(data) // display the returned data in the console.
+                    $('#shorted_url_field').val(data['data']['message']);
+                }
+            });
+            e.preventDefault(); // block the traditional submission of the form.
+        });
+    });
+</script>
+
+<body>
+    <div class="Wrapper">
+        <h1 class="Title">Simple Shorting URL Service</h1>
+        <div class="Input">
+            <form class="short" method="POST" id="url">
+
+                {{form.csrf_token}} 
+                {{form.short_url_field.label}} 
+                {{form.short_url_field(class_='Input-text', placeholder='Enter long URL, e.g https://www.facebook.com/profile.php?id=100012589710605')}}
+
+                <label for="input" class="Input-label">First name</label>
+                <input type="text" name="shorted_url" id="shorted_url_field" , class="shorted_url" , placeholder="e.g http://urlshortingservice.herokuapp.com/123">
+
+                <div id="container">
+                    <button class="short-url" type="submit" id="submit">
+                        <span class="circle">
+              <span class="icon arrow"></span>
+                        </span>
+                        <span class="button-text">Short</span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>

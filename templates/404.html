@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>404 – страница не найдена</title>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='404.css')}}">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+</head>
+<body>
+
+<div class="content">
+	<a href="{{ url_for('main') }}"></a>
+
+	<img src="{{ image }}" alt="image">
+
+</div>
+</body>
+</html>
